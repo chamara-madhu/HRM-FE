@@ -1,0 +1,11 @@
+.navbar-container {
+  padding: 10px 32px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  .company-name {
+    margin: 0;
+  }
+}

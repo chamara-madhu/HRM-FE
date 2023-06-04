@@ -1,0 +1,21 @@
+.content-container {
+  padding: 0 50px 20px 50px;
+  box-sizing: border-box;
+
+  .page-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    padding-top: 15px;
+    box-sizing: border-box;
+
+    .page-title {
+      margin: 0;
+    }
+  }
+
+  .form-container {
+    max-width: 500px;
+  }
+}
