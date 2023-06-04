@@ -30,9 +30,11 @@ const Main = () => {
     if (window.confirm("Are you sure that you want to delete this cafe?")) {
       try {
         await dispatch(deleteCafeStart(cafeId));
-        toast.success("Cafe has been deleted successfully.", {
-          theme: "colored",
-        });
+        setTimeout(() => {
+          toast.success("Cafe has been deleted successfully.", {
+            theme: "colored",
+          });
+        }, 2000);
       } catch (error) {
         console.error(error);
       }
@@ -80,7 +82,7 @@ const Main = () => {
           <CommonButton
             type="primary"
             label="Delete"
-            handleBtn={() => handleDelete(params.data.id)}
+            handleBtn={() => handleDelete(params.data._id)}
             icon={<DeleteOutlined />}
             isDanger
           />

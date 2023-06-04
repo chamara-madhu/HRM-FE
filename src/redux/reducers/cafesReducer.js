@@ -40,7 +40,7 @@ const cafesReducer = (state = cafesList, action) => {
       return {
         ...state,
         loading: false,
-        data: state.data.filter((el) => el.id !== action.payload),
+        data: state.data.filter((el) => el._id !== action.payload),
       };
     case GET_CAFES_FETCH_ERROR:
     case ADD_CAFE_ERROR:

@@ -1,1 +1,2 @@
-export const BASE_API = "https://hrm-be.onrender.com"; // "http://localhost:5000";
+export const BASE_API = "https://hrm-be.onrender.com";
+// export const BASE_API = "http://localhost:5000";
