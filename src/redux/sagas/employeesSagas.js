@@ -22,9 +22,9 @@ import {
   updateEmployeeSuccess,
 } from "../actions/employeesActions";
 
-function* getEmployeesFetchAsync() {
+function* getEmployeesFetchAsync({ payload }) {
   try {
-    const response = yield call(getEmployeesApi);
+    const response = yield call(getEmployeesApi, payload);
     yield put(getEmployeesFetchSuccess(response.data.data));
   } catch (err) {
     yield put(getEmployeesFetchError(err.response.data));
@@ -33,7 +33,7 @@ function* getEmployeesFetchAsync() {
 
 function* addEmployeeAsync({ payload }) {
   try {
-    const response = yield call(addEmployeeApi, payload);
+    yield call(addEmployeeApi, payload);
     yield put(addEmployeeSuccess());
   } catch (err) {
     yield put(addEmployeeError(err.response.data));
@@ -42,7 +42,7 @@ function* addEmployeeAsync({ payload }) {
 
 function* updateEmployeeAsync({ payload: { id, JSONData } }) {
   try {
-    const response = yield call(updateEmployeeApi, id, JSONData);
+    yield call(updateEmployeeApi, id, JSONData);
     yield put(updateEmployeeSuccess());
   } catch (err) {
     yield put(updateEmployeeError(err.response.data));
@@ -51,7 +51,7 @@ function* updateEmployeeAsync({ payload: { id, JSONData } }) {
 
 function* deleteEmployeeAsync({ payload }) {
   try {
-    const response = yield call(deleteEmployeeApi, payload);
+    yield call(deleteEmployeeApi, payload);
     yield put(deleteEmployeeSuccess(payload));
   } catch (err) {
     yield put(deleteEmployeeError(err.response.data));

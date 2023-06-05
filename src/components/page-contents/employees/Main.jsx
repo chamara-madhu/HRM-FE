@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import moment from "moment";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import CommonTable from "../../shared/tables/CommonTable";
@@ -12,33 +11,48 @@ import {
 import CommonButton from "../../shared/buttons/CommonButton";
 import PageHeader from "../../shared/PageHeader";
 import { Spin } from "antd";
+import CommonModal from "../../shared/modals/CommonModal";
 
 const Main = () => {
+  const [employeeId, setEmployeeId] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const dispatch = useDispatch();
   const { data: employees, loading } = useSelector(
     (state) => state.employeeList
   );
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    dispatch(getEmployeesFetchLoad());
+    // Accessing query parameters
+    const queryParams = new URLSearchParams(location.search);
+    const cafeParam = queryParams.get("cafe");
+    dispatch(getEmployeesFetchLoad(cafeParam));
   }, []);
 
-  const handleEdit = (cafeId) => {
-    navigate(`/employees/edit/${cafeId}`);
+  const showModal = (employeeId) => {
+    setEmployeeId(employeeId);
+    setIsDeleteModalOpen(true);
   };
 
-  const handleDelete = async (cafeId) => {
-    if (window.confirm("Are you sure that you want to delete this employee?")) {
-      try {
-        await dispatch(deleteEmployeeStart(cafeId));
-        toast.success("Employee has been deleted successfully.", {
-          theme: "colored",
-        });
-      } catch (error) {
-        console.error(error);
-      }
+  const handleOk = async () => {
+    try {
+      await dispatch(deleteEmployeeStart(employeeId));
+      setIsDeleteModalOpen(false);
+      toast.success("Employee has been deleted successfully.", {
+        theme: "colored",
+      });
+    } catch (error) {
+      console.error(error);
     }
+  };
+
+  const handleCancel = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const handleEdit = (employeeId) => {
+    navigate(`/employees/edit/${employeeId}`);
   };
 
   const columnDefs = [
@@ -75,12 +89,10 @@ const Main = () => {
     },
     {
       headerName: "No of days worked",
-      field: "noOfDays",
+      field: "workedDays",
       sortable: true,
       width: 170,
       resizable: true,
-      cellRendererFramework: (params) =>
-        moment().diff(moment(params?.data?.start_date), "days"),
     },
     {
       field: "cafe",
@@ -88,7 +100,8 @@ const Main = () => {
       filter: true,
       width: 200,
       resizable: true,
-      cellRendererFramework: (params) => params?.data?.cafe_id?.name || "-",
+      cellRendererFramework: (params) =>
+        params?.data?.cafe_id?.[0]?.name || "-",
     },
     {
       field: "actions",
@@ -103,7 +116,7 @@ const Main = () => {
           <CommonButton
             type="primary"
             label="Delete"
-            handleBtn={() => handleDelete(params.data.id)}
+            handleBtn={() => showModal(params.data.id)}
             icon={<DeleteOutlined />}
             isDanger
           />
@@ -126,6 +139,15 @@ const Main = () => {
       ) : (
         <CommonTable columnDefs={columnDefs} rowData={employees} />
       )}
+
+      <CommonModal
+        title="Delete Employee"
+        isModalOpen={isDeleteModalOpen}
+        handleOk={handleOk}
+        handleCancel={handleCancel}
+      >
+        <p>Are you sure that you want to delete this employee?</p>
+      </CommonModal>
     </>
   );
 };

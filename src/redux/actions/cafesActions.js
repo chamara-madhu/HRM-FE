@@ -11,11 +11,15 @@ import {
   UPDATE_CAFE_START,
   UPDATE_CAFE_SUCCESS,
   UPDATE_CAFE_ERROR,
+  GET_CAFES_UNIQUE_LOCATIONS_FETCH_START,
+  GET_CAFES_UNIQUE_LOCATIONS_FETCH_SUCCESS,
+  GET_CAFES_UNIQUE_LOCATIONS_FETCH_ERROR,
 } from "./types";
 
 // fetch cafes
-export const getCafesFetchLoad = () => ({
+export const getCafesFetchLoad = (locationParam) => ({
   type: GET_CAFES_FETCH_START,
+  payload: locationParam,
 });
 
 export const getCafesFetchSuccess = (cafes) => ({
@@ -71,5 +75,20 @@ export const deleteCafeSuccess = (cafeId) => ({
 
 export const deleteCafeError = (error) => ({
   type: DELETE_CAFE_ERROR,
+  payload: error,
+});
+
+// fetch unique cafe locations
+export const getCafesLocationsFetchStart = () => ({
+  type: GET_CAFES_UNIQUE_LOCATIONS_FETCH_START,
+});
+
+export const getCafesLocationsFetchSuccess = (locations) => ({
+  type: GET_CAFES_UNIQUE_LOCATIONS_FETCH_SUCCESS,
+  payload: locations,
+});
+
+export const getCafesLocationsFetchError = (error) => ({
+  type: GET_CAFES_UNIQUE_LOCATIONS_FETCH_ERROR,
   payload: error,
 });

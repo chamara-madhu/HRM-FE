@@ -13,6 +13,16 @@
     .page-title {
       margin: 0;
     }
+
+    .action-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .ant-form-item {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .form-container {

@@ -6,6 +6,7 @@ const TextField = ({
   type = "text",
   name,
   value,
+  size = "large",
   placeholder = "",
   handleChange,
   isRequired,
@@ -20,6 +21,7 @@ const TextField = ({
         onChange={handleChange}
         placeholder={placeholder}
         status={error && "error"}
+        size={size}
       />
       {error && <p className="cus-error">{error}</p>}
     </Form.Item>

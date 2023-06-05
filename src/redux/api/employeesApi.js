@@ -1,7 +1,10 @@
 import axios from "axios";
 import { BASE_API } from "../../config/constants";
 
-export const getEmployeesApi = () => axios.get(`${BASE_API}/api/v1/employees`);
+export const getEmployeesApi = (cafeParam) =>
+  axios.get(
+    `${BASE_API}/api/v1/employees${cafeParam ? `?cafe=${cafeParam}` : ""}`
+  );
 
 export const addEmployeeApi = async (data) => {
   await axios.post(`${BASE_API}/api/v1/employee`, data);

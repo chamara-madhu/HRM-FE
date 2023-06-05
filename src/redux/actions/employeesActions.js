@@ -14,8 +14,9 @@ import {
 } from "./types";
 
 // fetch employees
-export const getEmployeesFetchLoad = () => ({
+export const getEmployeesFetchLoad = (cafeParam) => ({
   type: GET_EMPLOYEES_FETCH_START,
+  payload: cafeParam,
 });
 
 export const getEmployeesFetchSuccess = (employees) => ({

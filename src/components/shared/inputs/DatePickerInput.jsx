@@ -5,6 +5,7 @@ const DatePickerInput = ({
   label,
   name,
   value,
+  size = "large",
   handleChange,
   error,
   isRequired,
@@ -16,6 +17,7 @@ const DatePickerInput = ({
         value={value}
         onChange={(date) => handleChange(name, date)}
         status={error && "error"}
+        size={size}
       />
       {error && <p className="cus-error">{error}</p>}
     </Form.Item>

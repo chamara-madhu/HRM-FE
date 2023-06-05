@@ -19,7 +19,7 @@ import { isValidateEmail } from "../../../helpers/utilityHelper";
 import DatePickerInput from "../../shared/inputs/DatePickerInput";
 
 const AddEditEmployee = () => {
-  const [cafeOptions, seCafeOptions] = useState([]);
+  const [cafeOptions, setCafeOptions] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -64,7 +64,7 @@ const AddEditEmployee = () => {
       label: item.name,
       value: item._id,
     }));
-    seCafeOptions(options);
+    setCafeOptions(options);
   }, [cafes]);
 
   useEffect(() => {

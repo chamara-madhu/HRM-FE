@@ -1,5 +1,11 @@
 import { all, fork } from "redux-saga/effects";
-import { addCafe, deleteCafe, getCafesFetch, updateCafe } from "./cafesSagas";
+import {
+  addCafe,
+  deleteCafe,
+  getCafesFetch,
+  getUniqueCafeLocationsFetch,
+  updateCafe,
+} from "./cafesSagas";
 import {
   addEmployee,
   deleteEmployee,
@@ -10,6 +16,7 @@ import {
 export default function* rootSaga() {
   yield all([
     fork(getCafesFetch),
+    fork(getUniqueCafeLocationsFetch),
     fork(addCafe),
     fork(deleteCafe),
     fork(updateCafe),

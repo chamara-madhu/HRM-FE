@@ -1,7 +1,13 @@
 import axios from "axios";
 import { BASE_API } from "../../config/constants";
 
-export const getCafesApi = () => axios.get(`${BASE_API}/api/v1/cafes`);
+export const getCafesApi = (location) =>
+  axios.get(
+    `${BASE_API}/api/v1/cafes${location ? `?location=${location}` : ""}`
+  );
+
+export const getUniqueCafeLocationsApi = () =>
+  axios.get(`${BASE_API}/api/v1/cafes/locations`);
 
 export const addCafeApi = async (data) => {
   await axios.post(`${BASE_API}/api/v1/cafe`, data, {
