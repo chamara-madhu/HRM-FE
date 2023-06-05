@@ -34,6 +34,7 @@ const Main = () => {
     // Accessing query parameters
     const queryParams = new URLSearchParams(location.search);
     const locationParam = queryParams.get("location");
+    setFilterByLocation(locationParam || "");
     dispatch(getCafesFetchLoad(locationParam));
   }, [location]);
 
