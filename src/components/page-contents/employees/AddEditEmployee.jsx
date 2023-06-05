@@ -78,7 +78,7 @@ const AddEditEmployee = () => {
           email: findEmployee.email_address,
           startDate: findEmployee.start_date,
           gender: findEmployee.gender,
-          cafeId: findEmployee?.cafe_id?._id || "",
+          cafeId: findEmployee?.cafe_id?.[0]?._id || "",
         }));
       } else {
         navigate("/employees/add");
