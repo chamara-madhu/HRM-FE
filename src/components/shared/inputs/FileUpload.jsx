@@ -62,6 +62,7 @@ const FileUpload = ({
             height: "100px",
             border: "1px solid #cccccc",
             borderRadius: "7px",
+            objectFit: "cover",
           }}
           src={previewImage}
         />
