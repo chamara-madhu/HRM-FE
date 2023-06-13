@@ -91,7 +91,7 @@ const AddEditCafe = () => {
       descriptionErr = "Only a maximum of 256 characters is allowed";
     }
 
-    if (!formData.description) {
+    if (!formData.location) {
       locationErr = "Location is required";
     }
 
